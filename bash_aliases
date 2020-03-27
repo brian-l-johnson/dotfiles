@@ -61,6 +61,8 @@ alias myip="curl http://ipecho.net/plain; echo"
 alias backup='rsync -avP --exclude-from=$HOME/sync/`hostname -s`-exclude.txt ~/ alexandria:/tank/backups/systems/`hostname -s`/'
 alias genpasswd='cat /dev/urandom | LC_ALL=C tr -cd [:alnum:] | head -c 30; echo'
 
+alias fzfp="fzf --preview 'cat {}'"
+
 
 #OS X specific aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -100,4 +102,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	alias afk="i3lock-fancy"
 	alias vpn-up="nmcli --ask connection up tunesmith"
 	alias vpn-down="nmcli connection down tunesmith"
+	alias stfu="pactl set-sink-mute 0 1"
+	alias mute=stfu
+	alias unmute="pactl set-sink-mute 0 0"
 fi
