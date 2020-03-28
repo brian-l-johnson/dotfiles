@@ -48,5 +48,5 @@ function parse_git_dirty {
 export PS1="\[\e[33m\]\u\[\e[m\]@\[\e[36;40m\]\h\[\e[m\]:\[\e[32m\]\W\[\e[m\]\[\e[35m\]\`parse_git_branch\`\[\e[m\]\\$ "
 
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin
-source ./sync/.bash_aliases
+#source ./sync/.bash_aliases
 
