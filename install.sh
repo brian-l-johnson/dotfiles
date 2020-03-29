@@ -19,6 +19,9 @@ i3_packages=(
 		i3status
 		feh
 		fonts-font-awesome
+		pavucontrol
+		pasystray
+		i3lock-fancy
 	      );
 	     
 DOTFILESGITURI="brian-l-johnson/dotfiles.git"
@@ -120,7 +123,7 @@ install_linux() {
 					if [ ! -d ".config" ]; then
 						mkdir .config
 					fi
-					if [ ! -d ".i3" ]; then
+					if [ ! -d ".config/i3" ]; then
 						mkdir .config/i3
 					fi
 					if [ ! -e ".config/i3/config" ]
@@ -141,6 +144,16 @@ install_linux() {
 					else
 						echo "Cowardly refusing to create symlink for i3status as it already exists"
 					fi
+					if [ ! -d ".config/rofi" ]
+					then
+						mkdir .config/rofi
+					fi
+					if [ ! -e ".config/rofi/config" ]
+					then
+						ln -s ~/dev/dotfiles/rofi/config .config/rofi/config
+					else
+						echo "Cowardly refusing to create symlink for rofi config as it already exists"
+					fi 
 					
 				;;		
 			esac
