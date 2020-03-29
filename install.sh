@@ -15,6 +15,7 @@ base_packages=(
 i3_packages=(
 		i3-wm
 		rofi
+		compton
 		i3status
 		feh
 		fonts-font-awesome
@@ -110,6 +111,42 @@ install_linux() {
 			else
 				echo "Cowardly refusing to create symlink for .bash_profile as it already exists"
 			fi
+			case $i3 in
+				[yY]* )
+					echo -e "\e[1m"
+					echo "Symlinking configs"
+					echo -en "\e[0m"
+					cd
+					if [ ! -d ".config" ]; then
+						mkdir .config
+					fi
+					if [ ! -d ".i3" ]; then
+						mkdir .config/i3
+					fi
+					if [ ! -e ".config/i3/config" ]
+					then
+						ln -s ~/dev/dotfiles/i3/config .config/i3/config
+					else
+						echo "Cowardly refusing to create symlink for i3 config as it already exists"
+					fi
+					if [ ! -e ".config/compton.conf" ]
+					then
+						ln -s ~/dev/dotfiles/compton/compton.conf .config/compton.conf
+					else
+						echo "Cowardly refusing to create symlink for compton config as it already exitsts"
+					fi
+					if [ ! -e ".i3status.conf" ]
+					then
+						ln -s ~/dev/dotfiles/i3/.i3status.conf .i3status.conf
+					else
+						echo "Cowardly refusing to create symlink for i3status as it already exists"
+					fi
+					
+				;;		
+			esac
+			echo -e "\e[1m"
+			echo "You should now be setup, good luck!"
+			echo -en "\e[0m"
 			;;
 			
 		*)
