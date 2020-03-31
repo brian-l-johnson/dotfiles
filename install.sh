@@ -76,7 +76,7 @@ install_linux() {
 			case $sshkeys in
 				[yY]*)
 					echo "yes"
-					scp -r alexandria:/tank/config/ssh/ ~/.ssh
+					scp -r alexandria:/tank/config/ssh ~/.ssh
 					DOTFILESGITURI="git@github.com:$DOTFILESGITURI"
 					;;
 				*) 
