@@ -56,6 +56,17 @@ function o() {
   fi
 }
 
+function update-dotfiles() {
+  OD=`pwd`
+  cd ~/dev/dotfiles
+  git pull
+  cd
+  source .bash_profile
+  source .bash_aliases
+  cd $OD
+  echo "Updated dotfiles, you may to to reload your session for some to take effect"
+}
+
 #misc
 alias myip="curl http://ipecho.net/plain; echo"
 alias backup='rsync -avP --exclude-from=$HOME/sync/`hostname -s`-exclude.txt ~/ alexandria:/tank/backups/systems/`hostname -s`/'
