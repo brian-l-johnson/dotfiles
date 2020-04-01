@@ -106,12 +106,14 @@ install_linux() {
 			if [ ! -e ".bash_aliases" ]
 			then
 				ln -s ~/dev/dotfiles/bash_aliases .bash_aliases
+				source .bash_aliases
 			else
 				echo "Cowardly refusing to create symlink for .bash_aliases as it already exists"
 			fi
 			if [ ! -e ".bash_profile" ]
 			then
 				ln -s ~/dev/dotfiles/bash_profile .bash_profile
+				source .bash_profile
 			else
 				echo "Cowardly refusing to create symlink for .bash_profile as it already exists"
 			fi
