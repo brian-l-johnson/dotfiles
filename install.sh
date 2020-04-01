@@ -69,7 +69,7 @@ install_linux() {
 				*) echo "no";;
 			esac
 			sudo apt update
-			sudo apt install $(echo ${package_list[*]})
+			sudo apt install -m $(echo ${package_list[*]})
 			echo -e "\e[1m"
 			read -s -p "Copy ssh keys and config? [yN] " -n 1 sshkeys
 			echo -en "\e[0m"
