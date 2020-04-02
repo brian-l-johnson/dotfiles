@@ -56,12 +56,20 @@ function o() {
   fi
 }
 
-function check_dotfiles() {
-	STATUS=`git -C ~/dev/dotfiles/ 
-remote show origin`
+function check-dotfiles() {
+	STATUS=`git -C ~/dev/dotfiles/ remote show origin`
 	if [[ "$STATUS" == *"local out of date"* ]]; then
 		echo "Dotfiles out of date";
 	fi
+function update-dotfiles() {
+  OD=`pwd`
+  cd ~/dev/dotfiles
+  git pull
+  cd
+  source .bash_profile
+  source .bash_aliases
+  cd $OD
+  echo "Updated dotfiles, you may to to reload your session for some to take effect"
 }
 
 #misc

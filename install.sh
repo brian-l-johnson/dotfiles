@@ -69,7 +69,7 @@ install_linux() {
 				*) echo "no";;
 			esac
 			sudo apt update
-			sudo apt install $(echo ${package_list[*]})
+			sudo apt install -m $(echo ${package_list[*]})
 			echo -e "\e[1m"
 			read -s -p "Copy ssh keys and config? [yN] " -n 1 sshkeys
 			echo -en "\e[0m"
@@ -106,12 +106,14 @@ install_linux() {
 			if [ ! -e ".bash_aliases" ]
 			then
 				ln -s ~/dev/dotfiles/bash_aliases .bash_aliases
+				source .bash_aliases
 			else
 				echo "Cowardly refusing to create symlink for .bash_aliases as it already exists"
 			fi
 			if [ ! -e ".bash_profile" ]
 			then
 				ln -s ~/dev/dotfiles/bash_profile .bash_profile
+				source .bash_profile
 			else
 				echo "Cowardly refusing to create symlink for .bash_profile as it already exists"
 			fi
