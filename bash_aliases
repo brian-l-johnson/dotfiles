@@ -61,6 +61,8 @@ function check-dotfiles() {
 	if [[ "$STATUS" == *"local out of date"* ]]; then
 		echo "Dotfiles out of date";
 	fi
+}
+
 function update-dotfiles() {
   OD=`pwd`
   cd ~/dev/dotfiles
