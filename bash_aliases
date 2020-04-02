@@ -56,6 +56,14 @@ function o() {
   fi
 }
 
+function check_dotfiles() {
+	STATUS=`git -C ~/dev/dotfiles/ 
+remote show origin`
+	if [[ "$STATUS" == *"local out of date"* ]]; then
+		echo "Dotfiles out of date";
+	fi
+}
+
 #misc
 alias myip="curl http://ipecho.net/plain; echo"
 alias backup='rsync -avP --exclude-from=$HOME/sync/`hostname -s`-exclude.txt ~/ alexandria:/tank/backups/systems/`hostname -s`/'
