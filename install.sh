@@ -22,6 +22,8 @@ i3_packages=(
 		pavucontrol
 		pasystray
 		i3lock-fancy
+		nm-tray
+		bluema
 	      );
 	     
 DOTFILESGITURI="brian-l-johnson/dotfiles.git"

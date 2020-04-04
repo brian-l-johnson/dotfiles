@@ -181,6 +181,10 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 2 +5% #i
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 2 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 2 toggle # mute sound
 
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
 
 bindsym $mod+Shift+s exec "systemctl suspend"
 bindsym $mod+Ctrl+l exec i3lock-fancy -g
@@ -189,5 +193,9 @@ bindsym $mod+Ctrl+l exec i3lock-fancy -g
 exec --no-startup-id "xautolock -time 5 -locker i3lock-fancy -g"
 exec --no-startup-id "compton"
 exec --no-startup-id "feh --randomize --bg-fill ~/Pictures/Backgrounds/*.jpg"
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id pasystray
+
 
 bindsym $mod+b exec --no-startup-id "feh --randomize --bg-fill ~/Pictures/Backgrounds/*.jpg"
