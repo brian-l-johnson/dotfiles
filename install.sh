@@ -25,6 +25,13 @@ i3_packages=(
 		nm-tray
 		bluema
 	      );
+
+yubikey_packages=(
+		    scdaemon
+		    gnupg-agent
+		    yubikey-personalization-gui
+		    yubikey-manager
+		 );
 	     
 DOTFILESGITURI="brian-l-johnson/dotfiles.git"
 
@@ -69,6 +76,16 @@ install_linux() {
 					;;
 
 				*) echo "no";;
+			esac
+			echo -e "\e[1m"
+			read -s -p "Install Yubikey tools? [yN]" -n 1 yubikey
+			echo -en "\e[0m"
+			case $yubikey in
+				[yY]* )
+					echo "yes"
+					package_list=(${package_list[@]} ${yubikey_packages[@]})
+					;;
+				*) echo "no"
 			esac
 			sudo apt update
 			sudo apt install -m $(echo ${package_list[*]})
