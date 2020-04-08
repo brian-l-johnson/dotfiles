@@ -101,10 +101,14 @@ install_linux() {
 			sudo apt update
 			sudo apt install -m $(echo ${package_list[*]})
 			read -s -p "${bold}Copy ssh keys and config? [yN] ${normal}" -n 1 sshkeys
+			if [[ ${yubikey^^} == "Y" ]]; then
+				rsync -avp alexandria:/tank/config/gnupg ~/.gunpg
+			fi
+			
 			case $sshkeys in
 				[yY]*)
 					echo "yes"
-					scp -r alexandria:/tank/config/ssh ~/.ssh
+					rsync -avp alexandria:/tank/config/ssh ~/.ssh
 					DOTFILESGITURI="git@github.com:$DOTFILESGITURI"
 					;;
 				*) 
