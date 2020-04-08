@@ -81,7 +81,7 @@ install_linux() {
 				* ) echo "no";;
 			
 			esac
-			read -s -p "#{bold}Install i3 gui? [yN]${normal} " -n 1 i3
+			read -s -p "${bold}Install i3 gui? [yN]${normal} " -n 1 i3
 			case $i3 in
 				[yY]* ) 
 					echo "yes"
@@ -138,7 +138,7 @@ install_linux() {
 					cd
 					symlink_config ~/dev/dotfiles/i3/config .config/i3/config
 					symlink_config ~/dev/dotfiles/compton/compton.conf .config/compton.conf
-					symlink_config ~/dev/dotfiles/i3/i3status .i3status.conf
+					symlink_config ~/dev/dotfiles/i3/i3status.conf .i3status.conf
 					symlink_config ~/dev/dotfiles/rofi/config .config/rofi/config
 				;;		
 			esac
