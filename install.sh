@@ -1,5 +1,9 @@
 #!/bin/bash
 
+bold=$(tput bold)
+normal=$(tput sgr0)
+txtred=$(tput setaf 1)
+
 base_packages=(
 		  joe
 		  tmux
@@ -43,19 +47,16 @@ symlink_config() {
 		fi
 		ln -s $1 $2
 	else
-		echo -e "\e[1;31mCowardly refusing to symlink config, $2 already exists\e[0m"		
+		echo "${bold}${txtred}Cowardly refusing to symlink config${normal}"		
 	fi 
 }
 
-echo_bold() {
-	echo -e "\e[1m$1\e[0m should be bold"
-}
 
 install_linux() {
 	case $( lsb_release -is ) in
 		Ubuntu)
 			echo "installing for Ubuntu"
-			echo -e "\e[1mConfigre apt proxy?\e[0m"
+			echo "${bold}Configre apt proxy?${normal}"
 			select aptproxy in "Manual" "Automatic" "No"
 			do
 				case $aptproxy in
@@ -71,9 +72,7 @@ install_linux() {
 			done
 			
 			package_list=(${base_packages[@]})
-			echo -e "\e[1m"
-			read -s -p "Install ssh server? [yN] " -n 1 sshd
-			echo -en "\e[0m"
+			read -s -p "${bold}Install ssh server? [yN]${normal} " -n 1 sshd
 			case $sshd in
 				[yY]* )
 					echo "yes"
@@ -82,9 +81,7 @@ install_linux() {
 				* ) echo "no";;
 			
 			esac
-			echo -e "\e[1m"
-			read -s -p "Install i3 gui? [yN] " -n 1 i3
-			echo -en "\e[0m"
+			read -s -p "#{bold}Install i3 gui? [yN]${normal} " -n 1 i3
 			case $i3 in
 				[yY]* ) 
 					echo "yes"
@@ -93,9 +90,7 @@ install_linux() {
 
 				*) echo "no";;
 			esac
-			echo -e "\e[1m"
-			read -s -p "Install Yubikey tools? [yN]" -n 1 yubikey
-			echo -en "\e[0m"
+			read -s -p "${bold}Install Yubikey tools? [yN]${normal}" -n 1 yubikey
 			case $yubikey in
 				[yY]* )
 					echo "yes"
@@ -105,9 +100,7 @@ install_linux() {
 			esac
 			sudo apt update
 			sudo apt install -m $(echo ${package_list[*]})
-			echo -e "\e[1m"
-			read -s -p "Copy ssh keys and config? [yN] " -n 1 sshkeys
-			echo -en "\e[0m"
+			read -s -p "${bold}Copy ssh keys and config? [yN] ${normal}" -n 1 sshkeys
 			case $sshkeys in
 				[yY]*)
 					echo "yes"
@@ -119,9 +112,7 @@ install_linux() {
 					DOTFILESGITURI="https://github.com/$DOTFILESGITURI"
 					;;
 			esac
-			echo -e "\e[1m"
-			echo "Retrieving dotfiles"
-			echo -en "\e[0m"
+			echo "${bold}Retrieving dotfiles${normal}"
 			cd
 			if [ ! -d "dev" ]
 			then
@@ -143,9 +134,7 @@ install_linux() {
 
 			case $i3 in
 				[yY]* )
-					echo -e "\e[1m"
-					echo "Symlinking configs"
-					echo -en "\e[0m"
+					echo "${bold}Symlinking configs${normal}"
 					cd
 					symlink_config ~/dev/dotfiles/i3/config .config/i3/config
 					symlink_config ~/dev/dotfiles/compton/compton.conf .config/compton.conf
@@ -153,9 +142,7 @@ install_linux() {
 					symlink_config ~/dev/dotfiles/rofi/config .config/rofi/config
 				;;		
 			esac
-			echo -e "\e[1m"
-			echo "You should now be setup, good luck!"
-			echo -en "\e[0m"
+			echo "${bold}You should now be setup, good luck!${normal}"
 			;;
 			
 		*)
