@@ -23,10 +23,26 @@ i3_packages=(
 		pasystray
 		i3lock-fancy
 		nm-tray
-		bluema
+		blueman
 	      );
 	     
 DOTFILESGITURI="brian-l-johnson/dotfiles.git"
+
+symlink_config() {
+	if [ ! -e $2 ]; then
+		local DIR=$(dirname $2)
+		if [ ! -d $DIR ]; then
+			mkdir -p $DIR
+		fi
+		ln -s $1 $2
+	else
+		echo -e "\e[1;31mCowardly refusing to symlink config, $2 already exists\e[0m"		
+	fi 
+}
+
+echo_bold() {
+	echo -e "\e[1m$1\e[0m should be bold"
+}
 
 install_linux() {
 	case $( lsb_release -is ) in
@@ -105,61 +121,19 @@ install_linux() {
 				git pull
 			fi
 			cd
-			if [ ! -e ".bash_aliases" ]
-			then
-				ln -s ~/dev/dotfiles/bash_aliases .bash_aliases
-				source .bash_aliases
-			else
-				echo "Cowardly refusing to create symlink for .bash_aliases as it already exists"
-			fi
-			if [ ! -e ".bash_profile" ]
-			then
-				ln -s ~/dev/dotfiles/bash_profile .bash_profile
-				source .bash_profile
-			else
-				echo "Cowardly refusing to create symlink for .bash_profile as it already exists"
-			fi
+			symlink_config ~/dev/dotfiles/bash_aliases .bash_aliases
+			symlink_config ~/dev/dotfiles/bash_profile .bash_profile
+
 			case $i3 in
 				[yY]* )
 					echo -e "\e[1m"
 					echo "Symlinking configs"
 					echo -en "\e[0m"
 					cd
-					if [ ! -d ".config" ]; then
-						mkdir .config
-					fi
-					if [ ! -d ".config/i3" ]; then
-						mkdir .config/i3
-					fi
-					if [ ! -e ".config/i3/config" ]
-					then
-						ln -s ~/dev/dotfiles/i3/config .config/i3/config
-					else
-						echo "Cowardly refusing to create symlink for i3 config as it already exists"
-					fi
-					if [ ! -e ".config/compton.conf" ]
-					then
-						ln -s ~/dev/dotfiles/compton/compton.conf .config/compton.conf
-					else
-						echo "Cowardly refusing to create symlink for compton config as it already exitsts"
-					fi
-					if [ ! -e ".i3status.conf" ]
-					then
-						ln -s ~/dev/dotfiles/i3/.i3status.conf .i3status.conf
-					else
-						echo "Cowardly refusing to create symlink for i3status as it already exists"
-					fi
-					if [ ! -d ".config/rofi" ]
-					then
-						mkdir .config/rofi
-					fi
-					if [ ! -e ".config/rofi/config" ]
-					then
-						ln -s ~/dev/dotfiles/rofi/config .config/rofi/config
-					else
-						echo "Cowardly refusing to create symlink for rofi config as it already exists"
-					fi 
-					
+					symlink_config ~/dev/dotfiles/i3/config .config/i3/config
+					symlink_config ~/dev/dotfiles/compton/compton.conf .config/compton.conf
+					symlink_config ~/dev/dotfiles/i3/i3status .i3status.conf
+					symlink_config ~/dev/dotfiles/rofi/config .config/rofi/config
 				;;		
 			esac
 			echo -e "\e[1m"
@@ -172,6 +146,8 @@ install_linux() {
 	esac
 }
 
+
+
 case $( uname -s ) in
 	Linux) 
 		install_linux
@@ -179,4 +155,3 @@ case $( uname -s ) in
 	*) 
 		echo "I don't know how to install for this OS";;
 esac
-
