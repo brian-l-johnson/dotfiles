@@ -49,3 +49,18 @@ export PS1="\[\e[33m\]\u\[\e[m\]@\[\e[36m\]\h\[\e[m\]:\[\e[32m\]\W\[\e[m\]\[\e[3
 
 export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 source ~/.bash_aliases
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+	#eval $(gpg-agent --daemon) > /dev/null
+	#GPG_TTY=$(tty)
+	#export GPG_TTY
+	#if [ -f "${HOME}/.gpg-agent-info" ]; then
+	#    . "${HOME}/.gpg-agent-info"
+	#    export GPG_AGENT_INFO
+	#    export SSH_AUTH_SOCK
+	#fi
+	export GPG_TTY="$(tty)"
+	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+	gpgconf --launch gpg-agent
+
+fi
