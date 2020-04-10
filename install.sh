@@ -146,6 +146,10 @@ install_linux() {
 					symlink_config ~/dev/dotfiles/rofi/config .config/rofi/config
 				;;		
 			esac
+			
+			echo "${bold}Loading dconf profiles${normal}"
+			dconf load  /org/gnome/terminal/legacy/profiles:/ < ~/dev/dotfiles/dconf/gnome-terminal.dconf
+			
 			echo "${bold}You should now be setup, good luck!${normal}"
 			;;
 			
