@@ -80,6 +80,8 @@ alias backup='rsync -avP --exclude-from=$HOME/sync/`hostname -s`-exclude.txt ~/ 
 alias genpasswd='cat /dev/urandom | LC_ALL=C tr -cd [:alnum:] | head -c 30; echo'
 alias fzfp="fzf --preview 'cat {}'"
 alias weather="curl wttr.in"
+alias gpg-update-card="gpg-connect-agent \"scd serialno\" \"learn --force\" /bye"
+
 
 #OS X specific aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
