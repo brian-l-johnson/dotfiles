@@ -64,3 +64,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	gpgconf --launch gpg-agent
 
 fi
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	export GPG_TTY="$(tty)"
+	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+	gpgconf --launch gpg-agent
+fi
