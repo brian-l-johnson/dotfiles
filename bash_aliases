@@ -81,7 +81,7 @@ alias genpasswd='cat /dev/urandom | LC_ALL=C tr -cd [:alnum:] | head -c 30; echo
 alias fzfp="fzf --preview 'cat {}'"
 alias weather="curl wttr.in"
 alias gpg-update-card="gpg-connect-agent \"scd serialno\" \"learn --force\" /bye"
-
+alias docker-ip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 
 #OS X specific aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
