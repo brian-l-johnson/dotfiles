@@ -28,6 +28,7 @@ i3_packages=(
 		i3lock-fancy
 		nm-tray
 		blueman
+		scrot
 	      );
 
 yubikey_packages=(
