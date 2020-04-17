@@ -191,7 +191,10 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 bindsym $mod+Shift+s exec "systemctl suspend"
 bindsym $mod+Ctrl+l exec i3lock-fancy -g
 
-bindsym $mod+Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+#bindsym $mod+Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/; notify-send -t 2000 -u low "screenshot saved to ~/Pictures/$f"'
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/' -e 'notify-send -t 2000 -u low "screenshot saved to ~/Pictures/$f"'
+
+
 
 exec --no-startup-id "xautolock -time 5 -locker i3lock-fancy -g"
 exec --no-startup-id "compton"
