@@ -29,6 +29,7 @@ i3_packages=(
 		nm-tray
 		blueman
 		scrot
+		dunst
 	      );
 
 yubikey_packages=(
