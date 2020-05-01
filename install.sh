@@ -146,6 +146,7 @@ install_linux() {
 					symlink_config ~/dev/dotfiles/compton/compton.conf .config/compton.conf
 					symlink_config ~/dev/dotfiles/i3/i3status.conf .i3status.conf
 					symlink_config ~/dev/dotfiles/rofi/config .config/rofi/config
+					symlink_config ~/dev/dotfiles/dunst/dunstrc .config/dunst/dustrc
 				;;		
 			esac
 			
