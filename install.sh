@@ -56,6 +56,9 @@ symlink_config() {
 
 install_linux() {
 	case $( lsb_release -is ) in
+		Raspbian)
+			echo "installing for Raspian"
+			;&		
 		Ubuntu)
 			echo "installing for Ubuntu"
 			echo "${bold}Configre apt proxy?${normal}"
@@ -104,13 +107,13 @@ install_linux() {
 			sudo apt install -m $(echo ${package_list[*]})
 			read -s -p "${bold}Copy ssh keys and config? [yN] ${normal}" -n 1 sshkeys
 			if [[ ${yubikey^^} == "Y" ]]; then
-				rsync -avp alexandria:/tank/config/gnupg ~/.gunpg
+				rsync -avp bj@alexandria:/tank/config/gnupg ~/.gunpg
 			fi
 			
 			case $sshkeys in
 				[yY]*)
 					echo "yes"
-					rsync -avp alexandria:/tank/config/ssh ~/.ssh
+					rsync -avp bj@alexandria:/tank/config/ssh/ ~/.ssh
 					DOTFILESGITURI="git@github.com:$DOTFILESGITURI"
 					;;
 				*) 
@@ -147,17 +150,17 @@ install_linux() {
 					symlink_config ~/dev/dotfiles/i3/i3status.conf .i3status.conf
 					symlink_config ~/dev/dotfiles/rofi/config .config/rofi/config
 					symlink_config ~/dev/dotfiles/dunst/dunstrc .config/dunst/dustrc
+					echo "${bold}Loading dconf profiles${normal}"
+					dconf load  /org/gnome/terminal/legacy/profiles:/ < ~/dev/dotfiles/dconf/gnome-terminal.dconf
+
 				;;		
 			esac
-			
-			echo "${bold}Loading dconf profiles${normal}"
-			dconf load  /org/gnome/terminal/legacy/profiles:/ < ~/dev/dotfiles/dconf/gnome-terminal.dconf
 			
 			echo "${bold}You should now be setup, good luck!${normal}"
 			;;
 			
 		*)
-			echo "I don't know how to install for this distro";;
+			echo "I do not know how to install for this distro";;
 	esac
 }
 
@@ -168,5 +171,7 @@ case $( uname -s ) in
 		install_linux
 		;;
 	*) 
-		echo "I don't know how to install for this OS";;
+		echo "I do not know how to install for this OS"
+		;;
 esac
+
