@@ -56,6 +56,9 @@ symlink_config() {
 
 install_linux() {
 	case $( lsb_release -is ) in
+		Debian)
+			echo "installing for Debian"
+			;&
 		Raspbian)
 			echo "installing for Raspian"
 			;&		
