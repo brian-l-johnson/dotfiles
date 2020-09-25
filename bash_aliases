@@ -82,6 +82,8 @@ alias fzfp="fzf --preview 'cat {}'"
 alias weather="curl wttr.in"
 alias gpg-update-card="gpg-connect-agent \"scd serialno\" \"learn --force\" /bye"
 alias docker-ip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
+qr() { qrencode "$1" -t ANSIUTF8 -o -; }
+
 
 #OS X specific aliases
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -101,7 +103,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	alias pumpitup="osascript -e 'set volume output volume 100'"
 
 	#unison in text mode
-	alias unison="unison -ui text"
+	#alias unison="unison -ui text"
+	#docker unison
+	alias unison="docker run -v /Users/bj:/home/bj --uts=host -it unison"
 
 	#empty trash and cleanup various locations
 	alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; sudo rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl; sqlite3 ~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV* 'delete from LSQuarantineEvent'"
