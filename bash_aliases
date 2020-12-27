@@ -49,6 +49,7 @@ function o() {
       *.html)	chromium-browser $1 ;;
       *.docx)	libreoffice $1 ;;
       *.xlsx)	libreoffice $1 ;;
+      *.csv)	libreoffice $1 ;;
       *)	echo "I don't know how to open '$1'...";;
     esac
   else
