@@ -3,6 +3,7 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 txtred=$(tput setaf 1)
+username=id -un
 
 base_packages=(
 		  joe
@@ -38,6 +39,12 @@ yubikey_packages=(
 		    yubikey-personalization-gui
 		    yubikey-manager
 		 );
+		 
+zsh_packages=(
+		zsh
+		fonts-powerline
+		powerline
+	     );
 	     
 DOTFILESGITURI="brian-l-johnson/dotfiles.git"
 
@@ -106,6 +113,14 @@ install_linux() {
 					;;
 				*) echo "no"
 			esac
+			read -s -p "${bold}Install zsh? [yN]${normal}" -n 1 zsh
+			case $zsh in
+				[yY]* )
+					echo "yes"
+					package_list=(${package_list[@]} ${zsh_packages[@]})
+					;;
+				*) echo "no"
+			esac
 			sudo apt update
 			sudo apt install -m $(echo ${package_list[*]})
 			read -s -p "${bold}Copy ssh keys and config? [yN] ${normal}" -n 1 sshkeys
@@ -157,6 +172,15 @@ install_linux() {
 					dconf load  /org/gnome/terminal/legacy/profiles:/ < ~/dev/dotfiles/dconf/gnome-terminal.dconf
 
 				;;		
+			esac
+			
+			case $zsh in 
+				[yY]* )
+					echo "${bold}Setting up zsh${normal}"
+					sudo chsh -s `which zsh` $username
+					CHSH=no RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+					
+				;;	
 			esac
 			
 			echo "${bold}You should now be setup, good luck!${normal}"
