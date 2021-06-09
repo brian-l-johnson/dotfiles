@@ -110,7 +110,7 @@ install_linux() {
 			sudo apt install -m $(echo ${package_list[*]})
 			read -s -p "${bold}Copy ssh keys and config? [yN] ${normal}" -n 1 sshkeys
 			if [[ ${yubikey^^} == "Y" ]]; then
-				rsync -avp bj@alexandria:/tank/config/gnupg ~/.gunpg
+				rsync -avp bj@alexandria.local:/tank/config/gnupg ~/.gunpg
 			fi
 			
 			case $sshkeys in
