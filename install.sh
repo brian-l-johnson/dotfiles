@@ -1,5 +1,9 @@
 #!/bin/bash
 
+DOTFILESGITURI="brian-l-johnson/dotfiles.git"
+EMAIL="brian.l.johnson@gmail.com"
+NAME="Brian Johnson"
+
 bold=$(tput bold)
 normal=$(tput sgr0)
 txtred=$(tput setaf 1)
@@ -46,7 +50,6 @@ zsh_packages=(
 		powerline
 	     );
 	     
-DOTFILESGITURI="brian-l-johnson/dotfiles.git"
 
 symlink_config() {
 	if [ ! -e $2 ]; then
@@ -145,6 +148,8 @@ install_linux() {
 					;;
 			esac
 			echo "${bold}Retrieving dotfiles${normal}"
+			git config --global user.email="$EMAIL"
+			git config --global user.name="$NAME"
 			cd
 			if [ ! -d "dev" ]
 			then
