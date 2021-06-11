@@ -190,6 +190,10 @@ install_linux() {
 					sudo chsh -s `which zsh` $username
 					CHSH=no RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 					sed -i "s/ZSH_THEME=\".*\"/ZSH_THEME=\"agnoster\"/" ~/.zshrc 
+					if grep -q "source ~/.bash_aliases" ~/.bash_aliases; then
+						echo "source ~/.bash_aliases" >> ~/.bash_aliases
+					
+					fi
 					
 				;;	
 			esac
