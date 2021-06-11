@@ -184,7 +184,7 @@ install_linux() {
 					echo "${bold}Setting up zsh${normal}"
 					sudo chsh -s `which zsh` $username
 					CHSH=no RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-					sed -i "s/ZSH_THEME=\".*\"/ZSH_THEME=\"angoster\"/" ~/.zshrc 
+					sed -i "s/ZSH_THEME=\".*\"/ZSH_THEME=\"agnoster\"/" ~/.zshrc 
 					
 				;;	
 			esac
