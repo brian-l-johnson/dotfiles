@@ -3,7 +3,7 @@
 bold=$(tput bold)
 normal=$(tput sgr0)
 txtred=$(tput setaf 1)
-username=id -un
+username=`id -un`
 
 base_packages=(
 		  joe
@@ -62,6 +62,11 @@ symlink_config() {
 
 
 install_linux() {
+	which lsb_release2 > /dev/null
+	if [ $? == 1 ]; then
+		echo "lsb_release doesn't exist, trying to fix it";
+		sudo apt insall lsb-release
+	fi
 	case $( lsb_release -is ) in
 		Debian)
 			echo "installing for Debian"
