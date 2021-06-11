@@ -65,7 +65,7 @@ install_linux() {
 	which lsb_release2 > /dev/null
 	if [ $? == 1 ]; then
 		echo "lsb_release doesn't exist, trying to fix it";
-		sudo apt insall lsb-release
+		sudo apt install lsb-release
 	fi
 	case $( lsb_release -is ) in
 		Debian)
@@ -136,7 +136,7 @@ install_linux() {
 			case $sshkeys in
 				[yY]*)
 					echo "yes"
-					rsync -avp bj@alexandria:/tank/config/ssh/ ~/.ssh
+					rsync -avp bj@alexandria.local:/tank/config/ssh/ ~/.ssh
 					DOTFILESGITURI="git@github.com:$DOTFILESGITURI"
 					;;
 				*) 
