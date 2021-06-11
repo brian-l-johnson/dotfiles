@@ -3,6 +3,7 @@
 DOTFILESGITURI="brian-l-johnson/dotfiles.git"
 EMAIL="brian.l.johnson@gmail.com"
 NAME="Brian Johnson"
+RSYNCBASE="bj@alexandria.local:/tank"
 
 bold=$(tput bold)
 normal=$(tput sgr0)
@@ -133,13 +134,13 @@ install_linux() {
 			sudo apt install -m $(echo ${package_list[*]})
 			read -s -p "${bold}Copy ssh keys and config? [yN] ${normal}" -n 1 sshkeys
 			if [[ ${yubikey^^} == "Y" ]]; then
-				rsync -avp bj@alexandria.local:/tank/config/gnupg ~/.gunpg
+				rsync -avp $RSYNCBASE/config/gnupg ~/.gunpg
 			fi
 			
 			case $sshkeys in
 				[yY]*)
 					echo "yes"
-					rsync -avp bj@alexandria.local:/tank/config/ssh/ ~/.ssh
+					rsync -avp $RSYNCVASE/config/ssh/ ~/.ssh
 					DOTFILESGITURI="git@github.com:$DOTFILESGITURI"
 					;;
 				*) 
