@@ -140,7 +140,7 @@ install_linux() {
 			case $sshkeys in
 				[yY]*)
 					echo "yes"
-					rsync -avp $RSYNCVASE/config/ssh/ ~/.ssh
+					rsync -avp $RSYNCBASE/config/ssh/ ~/.ssh
 					DOTFILESGITURI="git@github.com:$DOTFILESGITURI"
 					;;
 				*) 
@@ -172,6 +172,8 @@ install_linux() {
 
 			case $i3 in
 				[yY]* )
+					echo "${bold}Copying background image${normal}"
+					rsync -avp $RSYNCBASE/config/Backgrounds Pictures/
 					echo "${bold}Symlinking configs${normal}"
 					cd
 					symlink_config ~/dev/dotfiles/i3/config .config/i3/config

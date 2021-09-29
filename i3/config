@@ -201,7 +201,7 @@ bindsym Print exec "scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg'  -e 'notify-send -i
 
 
 
-exec --no-startup-id "xautolock -time 5 -locker i3lock-fancy -g"
+#exec --no-startup-id "xautolock -time 5 -locker i3lock-fancy -g"
 exec --no-startup-id "compton"
 exec --no-startup-id "feh --randomize --bg-fill ~/Pictures/Backgrounds/*.jpg"
 exec --no-startup-id nm-applet
