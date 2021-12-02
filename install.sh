@@ -3,7 +3,7 @@
 DOTFILESGITURI="brian-l-johnson/dotfiles.git"
 EMAIL="brian.l.johnson@gmail.com"
 NAME="Brian Johnson"
-RSYNCBASE="bj@alexandria.local:/tank"
+RSYNCBASE="bj@alexandria.home:/tank"
 
 bold=$(tput bold)
 normal=$(tput sgr0)
