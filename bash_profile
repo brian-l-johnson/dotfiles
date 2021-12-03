@@ -68,4 +68,5 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
 	export GPG_TTY="$(tty)"
 	export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 	gpgconf --launch gpg-agent
-fi
+fiPATH=$PATH:/opt/metasploit-framework/bin
+export PATH=$PATH:/opt/metasploit-framework/bin

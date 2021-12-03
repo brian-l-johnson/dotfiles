@@ -78,7 +78,7 @@ function update-dotfiles() {
 #misc
 alias myip="curl http://ipecho.net/plain; echo"
 alias backup='rsync -avP --exclude-from=$HOME/sync/`hostname -s`-exclude.txt ~/ alexandria:/tank/backups/systems/`hostname -s`/'
-alias genpasswd='cat /dev/urandom | LC_ALL=C tr -cd [:alnum:] | head -c 30; echo'
+alias genpasswd='cat /dev/urandom | LC_ALL=C tr -cd \[:alnum:\] | head -c 30; echo'
 alias fzfp="fzf --preview 'cat {}'"
 alias weather="curl wttr.in"
 alias gpg-update-card="gpg-connect-agent \"scd serialno\" \"learn --force\" /bye"
