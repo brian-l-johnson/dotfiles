@@ -39,6 +39,11 @@ function extract () {
    fi
  }
 
+#remote ssh wireshark capture for specified host
+function rwc () {
+  ssh root@192.168.1.1 tcpdump -i mvneta1 -U -s0 -w - \'host $1\' | Wireshark -k -i -
+}
+
 function o() {
   if [ -f $1 ] ; then
     case $1 in 
