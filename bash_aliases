@@ -41,7 +41,7 @@ function extract () {
 
 #remote ssh wireshark capture for specified host
 function rwc () {
-  ssh root@192.168.1.1 tcpdump -i mvneta1 -U -s0 -w - \'host $1\' | Wireshark -k -i -
+  ssh root@192.168.1.1 tcpdump -i mvneta1 -U -s0 -w - \'host $1\' | wireshark -k -i -
 }
 
 function o() {
@@ -119,6 +119,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 	#get md5sum and sha1sum
 	command -v md5sum > /dev/null || alias md5sum="md5"
 	command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+	#wireshar
+	alias wireshark="Wireshark"
 
 fi
 
